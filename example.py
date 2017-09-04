@@ -1,32 +1,51 @@
-from datetime import datetime
+import datetime
 import operator
+import types
 
+def transform_dict_values_to_string(d):
+	td = {}
+	for key in d.keys():
+		value = d[key]
+		td[key] = value
+		if value is not None:
+			value_type = type(value)
+			if value_type == datetime.datetime:
+				td[key] = value.strftime('%Y-%m-%d')
+			# if value_type == types.BooleanType:
+			# 	td[key] = 'male' if operator.truth(value) else 'female'
+	return td
 
-def describe_person(person_dict):
-	generic_arg_list =  (person_dict['first_name'], person_dict['last_name'], person_dict['gender'], person_dict['date_of_birth'])
-	generic_info = "%s %s is a %s born on %s." % generic_arg_list
-	if operator.truth(person_dict['college']):
-		print generic_info + (' He went to %s.' % person_dict['college'])
+def describe_person(d):
+	td = transform_dict_values_to_string(d)
+
+	generic_arg_list =  (td['first_name'], td['last_name'], td['gender'], td['date_of_birth'])
+	generic_info = "%s %s is a %s born on %s" % generic_arg_list
+
+	if operator.truth(td['college']):
+		print(generic_info + (', and attended %s.' % td['college']))
 	else:
-		print generic_info
+		print(generic_info + '.')
 
 
 john_doe_info = {
 	'first_name': 'John',
 	'last_name': 'Doe',
-	'gender': 'male',
-	'date_of_birth': datetime(year=1997, month=7, day=31).strftime('%Y-%m-%d'),
+	'gender': True,
+	'date_of_birth': datetime.datetime(year=1997, month=7, day=31),
 	'college': 'American University',
 }
 
-tom_smith_info = {
-	'first_name': 'Tom',
+jane_smith_info = {
+	'first_name': 'Jane',
 	'last_name': 'Smith',
-	'gender': 'male',
-	'date_of_birth': datetime(year=1998, month=8, day=30).strftime('%Y-%m-%d'),
-	'college': None
+	'gender': False,
+	'date_of_birth': datetime.datetime(year=1998, month=8, day=30),
+	'college': None,
 }
 
+
+
+
 describe_person(john_doe_info)
-describe_person(tom_smith_info)
+#describe_person(jane_smith_info)
 
