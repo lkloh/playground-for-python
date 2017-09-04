@@ -1,6 +1,4 @@
-# python-operators
+# playground-for-python
 
-# Dependencies
-
-* [PyTrends](https://github.com/GeneralMills/pytrends)
+Where I test out stuff in python. No particular order right now.
 
