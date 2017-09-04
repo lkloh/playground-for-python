@@ -2,6 +2,7 @@ import datetime
 import operator
 import types
 
+
 def transform_dict_values_to_string(d):
 	td = {}
 	for key in d.keys():
@@ -41,7 +42,6 @@ jane_smith_info = {
 	'date_of_birth': datetime.datetime(year=1998, month=8, day=30),
 	'college': None,
 }
-
 
 if __name__ == '__main__':
 	describe_person(john_doe_info)
