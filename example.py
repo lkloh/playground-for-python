@@ -8,11 +8,10 @@ def transform_dict_values_to_string(d):
 		value = d[key]
 		td[key] = value
 		if value is not None:
-			value_type = type(value)
-			if value_type == datetime.datetime:
+			if type(value) == datetime.datetime:
 				td[key] = value.strftime('%Y-%m-%d')
-			# if value_type == types.BooleanType:
-			# 	td[key] = 'male' if operator.truth(value) else 'female'
+			if value.__class__.__name__ == 'bool':
+				td[key] = 'male' if operator.truth(value) else 'female'
 	return td
 
 def describe_person(d):
@@ -47,5 +46,5 @@ jane_smith_info = {
 
 
 describe_person(john_doe_info)
-#describe_person(jane_smith_info)
+describe_person(jane_smith_info)
 
