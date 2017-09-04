@@ -43,8 +43,7 @@ jane_smith_info = {
 }
 
 
-
-
-describe_person(john_doe_info)
-describe_person(jane_smith_info)
+if __name__ == '__main__':
+	describe_person(john_doe_info)
+	describe_person(jane_smith_info)
 
