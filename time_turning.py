@@ -18,12 +18,11 @@ def move_forward_in_time():
 		frozen_datetime.move_to(election_day)
 		assert datetime.now() == election_day
 
-def failed_test():
+def expect_this_to_fail():
 	obama_birthday = datetime(year=1961, month=8, day=4)
-	print datetime.now()
 	assert datetime.now() == obama_birthday
 
 if __name__ == '__main__':
 	basic()
 	move_forward_in_time()
-	failed_test()
+	expect_this_to_fail()
