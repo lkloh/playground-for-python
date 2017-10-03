@@ -1,4 +1,5 @@
 # Dependencies: Python 3
+# Reference: https://stackoverflow.com/questions/18191275/using-pythons-mock-patch-object-to-change-the-return-value-of-a-method-called-w
 
 import random
 from unittest.mock import patch
