@@ -4,7 +4,7 @@ import random
 import unittest
 from unittest.mock import patch
 
-class TestStringMethods(unittest.TestCase):
+class TestPatchSetup(unittest.TestCase):
 
     @classmethod
     @patch.object(random, 'random')
@@ -19,6 +19,24 @@ class TestStringMethods(unittest.TestCase):
         print(random.random())
 
     def test_three(self):
+        print(random.random())
+
+@patch.object(random, 'random')
+class TestPatchClass(unittest.TestCase):
+
+    def setUp(self):
+        self.patch_random = patch('random.random')
+        self.mock_random = self.patch_random.start()
+        self.mock_random.return_value = 0.5
+        self.addCleanup(self.patch_random.stop)
+
+    def test_one(self, mock):
+        print(random.random())
+
+    def test_two(self, mock):
+        print(random.random())
+
+    def test_three(self, mock):
         print(random.random())
 
 if __name__ == '__main__':
