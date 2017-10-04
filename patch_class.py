@@ -27,16 +27,20 @@ class TestPatchClass(unittest.TestCase):
     def setUp(self):
         self.patch_random = patch('random.random')
         self.mock_random = self.patch_random.start()
-        self.mock_random.return_value = 0.5
+
+    def tearDown(self):
         self.addCleanup(self.patch_random.stop)
 
     def test_one(self, mock):
+        mock.return_value = 0.6
         print(random.random())
 
     def test_two(self, mock):
+        mock.return_value = 0.7
         print(random.random())
 
     def test_three(self, mock):
+        mock.return_value = 0.8
         print(random.random())
 
 if __name__ == '__main__':
