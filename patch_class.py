@@ -27,8 +27,6 @@ class TestPatchClass(unittest.TestCase):
     def setUp(self):
         self.patch_random = patch('random.random')
         self.mock_random = self.patch_random.start()
-
-    def tearDown(self):
         self.addCleanup(self.patch_random.stop)
 
     def test_one(self, mock):
