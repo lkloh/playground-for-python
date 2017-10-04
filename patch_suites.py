@@ -16,10 +16,12 @@ class TestPatchClass(unittest.TestCase):
         print(random.random())
 
 if __name__ == '__main__':
+    # unittest.TextTestRunner().run(unittest.makeSuite(TestPatchClass))
+
     with patch.object(random, 'random') as mock_random:
         mock_random.return_value = 0.5
-        unittest.main()
+        unittest.TextTestRunner().run(unittest.makeSuite(TestPatchClass))
 
     with patch.object(random, 'random') as mock_random:
         mock_random.return_value = 0.7
-        unittest.main()
+        unittest.TextTestRunner().run(unittest.makeSuite(TestPatchClass))
