@@ -19,14 +19,15 @@ class TestPatchClass(unittest.TestCase):
 
 
 def decorator(cls):
-    class Wrapper(object):
-        def __init__(self, *args):
-            self.wrapped = cls(*args)
+	class Wrapper(object):
+		def __init__(self, *args):
+			self.wrapped = cls(*args)
 
-        def __getattr__(self, name):
-            return getattr(self.wrapped, name)
+		def __getattr__(self, name):
+			return getattr(self.wrapped, name)
 
-    return Wrapper
+	return Wrapper
+
 
 @decorator
 class C(object):
