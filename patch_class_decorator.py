@@ -23,8 +23,13 @@ def decorator(cls):
 		def __init__(self, *args):
 			self.wrapped = cls(*args)
 
-		def __getattr__(self, name):
-			return getattr(self.wrapped, name)
+		@patch.object(random, 'random')
+		def __getattr__(self, name, mock):
+			mock.return_value = 0.5
+			print(random.random())
+			with patch.object(random, 'random') as mock:
+				mock.return_value = 0.4
+				return getattr(self.wrapped, name)
 
 	return Wrapper
 
