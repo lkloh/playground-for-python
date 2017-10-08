@@ -5,6 +5,7 @@ import random
 import math
 import unittest
 
+# test_<function_name> are tests that get run in unittest
 
 class TestPatchClass(unittest.TestCase):
 
