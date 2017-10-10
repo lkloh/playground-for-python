@@ -1,0 +1,4 @@
+WARNING:__main__:The air in San Francisco today is terrible.
+WARNING:__main__:The air in San Francisco today is terrible.
+WARNING:__main__:The air in San Francisco today is terrible.
+WARNING:__main__:The air in San Francisco today is terrible.
