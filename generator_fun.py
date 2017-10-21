@@ -26,6 +26,16 @@ def calculate_sum_by_creating_list_with_generator(n):
 			i += 1
 	return sum(list_generator(n))
 
+@output_peak_memory_usage_of_function
+def python_xrange():
+	lst = [i for i in range(1000000)]
+
+@output_peak_memory_usage_of_function
+def python_range():
+	lst = [i for i in xrange(100000)]
+
 if __name__=='__main__':
 	calculate_sum_by_creating_list_with_generator(1000000)
 	calculate_sum_by_creating_list_in_memory(1000000)
+	python_range()
+	python_xrange()
