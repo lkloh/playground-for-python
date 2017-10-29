@@ -8,7 +8,7 @@ def join_words_to_sentence_primitive(words):
 	if words:
 		s = ''
 		for i, word in enumerate(words):
-			s += (word + '.') if (i == len(words)-1) else (word + ' ')
+			s += (word + '.') if (i == len(words) - 1) else (word + ' ')
 		return s
 	else:
 		return ''
@@ -16,7 +16,8 @@ def join_words_to_sentence_primitive(words):
 
 class TestJoin(unittest.TestCase):
 	def setUp(self):
-		self.join_sentence_func = lambda *args: None
+		do_nothing = lambda *args, **kwargs: None
+		self.join_sentence_func = do_nothing
 
 	def test_one_word_sentence(self):
 		self.assertEqual('No.', self.join_sentence_func(['No']))
