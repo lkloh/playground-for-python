@@ -1,6 +1,7 @@
 import unittest
 
-def join_words_to_sentence_python_shortcuts(words):
+
+def join_words_to_sentence_shortcut(words):
 	return (' '.join(words) + '.') if words else ''
 
 def join_words_to_sentence_primitive(words):
@@ -14,9 +15,8 @@ def join_words_to_sentence_primitive(words):
 
 
 class TestJoin(unittest.TestCase):
-
 	def setUp(self):
-		self.join_sentence_func = join_words_to_sentence_primitive
+		self.join_sentence_func = lambda *args: None
 
 	def test_one_word_sentence(self):
 		self.assertEqual('No.', self.join_sentence_func(['No']))
@@ -33,6 +33,20 @@ class TestJoin(unittest.TestCase):
 		self.assertEqual('I am a person who loves long words.', self.join_sentence_func(words))
 
 
+class TestJoinPrimitive(TestJoin):
+	def setUp(self):
+		self.join_sentence_func = join_words_to_sentence_primitive
+
+
+class TestJoinShortcut(TestJoin):
+	def setUp(self):
+		self.join_sentence_func = join_words_to_sentence_shortcut
+
+
 if __name__ == '__main__':
-	unittest.main()
+	#unittest.main()
+	suite_primitive = unittest.TestLoader().loadTestsFromTestCase(TestJoinPrimitive)
+	suite_shortcut = unittest.TestLoader().loadTestsFromTestCase(TestJoinShortcut)
+	all_tests = unittest.TestSuite([suite_primitive, suite_shortcut])
+	unittest.TextTestRunner(verbosity=2).run(all_tests)
 
