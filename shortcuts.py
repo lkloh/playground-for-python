@@ -13,6 +13,21 @@ def join_words_to_sentence_primitive(words):
 	else:
 		return ''
 
+def join_words_to_sentence_longwinded(words):
+	if len(words) > 0:
+		s = ''
+		for i in range(len(words)):
+			word = words[i]
+			if i == len(words) - 1:
+				s += word
+				s += '.'
+			else:
+				s += word
+				s += ' '
+		return s
+	else:
+		return ''
+
 
 class TestJoin(unittest.TestCase):
 	def setUp(self):
@@ -44,10 +59,15 @@ class TestJoinShortcut(TestJoin):
 		self.join_sentence_func = join_words_to_sentence_shortcut
 
 
+class TestJoinLongwinded(TestJoin):
+	def setUp(self):
+		self.join_sentence_func = join_words_to_sentence_longwinded
+
+
 if __name__ == '__main__':
-	#unittest.main()
+	suite_longwinded = unittest.TestLoader().loadTestsFromTestCase(TestJoinLongwinded)
 	suite_primitive = unittest.TestLoader().loadTestsFromTestCase(TestJoinPrimitive)
 	suite_shortcut = unittest.TestLoader().loadTestsFromTestCase(TestJoinShortcut)
-	all_tests = unittest.TestSuite([suite_primitive, suite_shortcut])
+	all_tests = unittest.TestSuite([suite_longwinded, suite_primitive, suite_shortcut])
 	unittest.TextTestRunner(verbosity=2).run(all_tests)
 
