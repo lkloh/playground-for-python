@@ -1,61 +1,28 @@
-
-class Employee:
-    def __init__(self, firstname, lastname, salary, bonus=0):
-        self.firstname = firstname
-        self.lastname = lastname
-        self.salary = salary
-        self.bonus = bonus
-
-    def update_salary(self, new_salary):
-        if new_salary > 0:
-            self.salary = new_salary
-        else:
-            raise 'Salary should be a positive number'
-
-    def update_bpnus(self, new_bonus):
-        if new_bonus > 0:
-            self.bonus = new_bonus
-        else:
-            raise 'Bonus should be a positive number'
-
-    def __str__(self):
-        return 'Employee %s %s has a salary of $%d and bonus of $%d' % (self.firstname, self.lastname, self.salary, self.bonus)
+import unittest
+from fail_fast_test_helper import increase_employees_salary, Employee, TestIncreaseSalary
 
 
-_employees = [
-    Employee('Alice', 'Anderson', 115, bonus=5),
-    Employee('Bob', 'Brown', 95, bonus=20),
-    Employee('Charlie', 'Chaplin', 95, bonus=20),
-]
 
-def print_employees():
-    print '\nEMPLOYEES:'
-    for e in _employees:
-        print str(e)
-    print '\n'
 
-def get_existing_ids(id_list):
-    return list(filter(lambda id: id in xrange(len(_employees)), id_list))
 
-def increase_employees_salary(salary_update_list):
-    for id, new_salary in salary_update_list:
-        _employees[id].update_salary(new_salary)
+def get_existing_ids(employees, id_list):
+    return list(filter(lambda id: id in xrange(len(employees)), id_list))
 
-def increase_employees_salary_sanitize(salary_update_list):
-    id_list = get_existing_ids(map(lambda p : p[0], salary_update_list))
-    salary_update_list = [pair for pair in salary_update_list if pair[0] in id]
+def increase_employees_salary_sanitize(employees, salary_update_list):
+    id_list = get_existing_ids(employees, map(lambda p : p[0], salary_update_list))
+    salary_update_list = [pair for pair in salary_update_list if pair[0] in id_list]
     if salary_update_list > 0:
         for id, new_salary in salary_update_list:
-            _employees[id].update_salary(new_salary)
+            employees[id].update_salary(new_salary)
+
+
+class TestIncreaseSalarySanitize(TestIncreaseSalary):
+    def setUp(self):
+        self.test_update_salary_func = increase_employees_salary_sanitize
+        self.alice = Employee('Alice', 'Anderson', 115, bonus=5)
+        self.bob = Employee('Bob', 'Brown', 95, bonus=20)
+        self.charlie = Employee('Charlie', 'Chaplin', 95, bonus=20)
+        self.employees = [self.alice, self.bob, self.charlie]
 
 if __name__ == '__main__':
-
-
-    print_employees()
-    salary_update_list = [
-        (0, 120),
-        (2, 100),
-    ]
-    increase_employees_salary_sanitize(salary_update_list)
-    print_employees()
-
+    unittest.main()
