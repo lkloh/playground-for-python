@@ -26,7 +26,7 @@ def find_unique_tree(n):
 	if n == 0:
 		return []
 	elif n == 1:
-		return ['1']
+		return ['*']
 	else:
 		all_unique_trees = []
 
@@ -46,6 +46,9 @@ print find_unique_tree(0)
 print find_unique_tree(1)
 print find_unique_tree(2)
 print find_unique_tree(3)
+print find_unique_tree(4)
+print find_unique_tree(5)
+
 
 
 
