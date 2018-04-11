@@ -1,4 +1,4 @@
-from voluptuous import In, Schema
+from voluptuous import All, In, Schema
 
 def replace_boolean(value):
   if value == 'boolean':
@@ -8,15 +8,33 @@ def replace_boolean(value):
 
 validate_params = Schema({
   'gender': In(['male', 'female', 'other']),
-  'type': replace_boolean,
+  'type': All(In(['boolean', 'string', 'unicode']), replace_boolean),
 }, required=True)
 
-params = {
+params1 = {
   'gender': 'female',
   'type': 'boolean',
 }
-params = validate_params(params)
-print params
+params1 = validate_params(params1)
+print params1
+print '\n'
+
+
+params2 = {
+  'gender': 'female',
+  'type': 'string',
+}
+params2 = validate_params(params2)
+print params2
+print '\n'
+
+
+params3 = {
+  'gender': 'male',
+  'type': 'alien',
+}
+params3 = validate_params(params3)
+print params3
 
 
 
